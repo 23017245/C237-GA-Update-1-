@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= book.title %> - Book Details</title>
+    <style>
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #4285f4;
+    text-align: center;
+    font-family: 'Roboto', Arial, sans-serif; /* Use Google Fonts for 'Roboto' */
+}
+
+.book-details {
+    display: flex;
+    align-items: flex-start;
+}
+
+.book-cover {
+    width: 200px;
+    height: auto;
+    margin-right: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.details {
+    flex: 1;
+}
+
+.details p {
+    color: #555;
+    line-height: 1.6;
+}
+
+form {
+    margin-top: 10px;
+}
+
+input[type="text"], button {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+button:hover {
+    background-color: #357ae8;
+}
+
+.navigation {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #4285f4;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #357ae8;
+}
+
+.btn-secondary {
+    background-color: #f0f0f0;
+    color: #333;
+    margin-left: 10px;
+}
+
+.btn-secondary:hover {
+    background-color: #e0e0e0;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1><%= book.title %></h1>
+        <div class="book-details">
+            <img src="/images/<%= book.image %>" alt="<%= book.title %>" class="book-cover">
+            <div class="details">
+                <p><strong>Author:</strong> <%= book.author %></p>
+                <p><strong>Summary:</strong></p>
+                <p><%= book.summary %></p>
+                <p><strong>Availability:</strong> <%= book.available === 1 ? 'Yes' : 'No' %></p>
+                <% if (book.available > 0) { %>
+                    <form action="/borrow-book" method="POST">
+                        <input type="hidden" name="bookId" value="<%= book.bookId %>">
+                        <input type="text" name="userId" placeholder="Enter your user ID" required>
+                        <button type="submit">Borrow</button>
+                    </form>
+                <% } else { %>
+                    <p>This book is currently not available for borrowing.</p>
+                <% } %>
+            </div>
+        </div>
+        <div class="navigation">
+            <a href="/browse" class="btn btn-secondary">Back to Browsing</a>
+        </div>
+    </div>
+</body>
+</html>

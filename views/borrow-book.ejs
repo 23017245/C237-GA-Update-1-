@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrow Book</title>
+</head>
+<body>
+    <h1>Borrow Book</h1>
+    <form action="/borrow-book" method="post">
+        <input type="hidden" name="userId" value="<%= book.userId %>">
+        <input type="hidden" name="bookId" value="<%= bookId %>">
+        <button type="submit">Confirm Borrow</button>
+    </form>
+    <a href="/browse">Cancel</a>
+</body>
+</html

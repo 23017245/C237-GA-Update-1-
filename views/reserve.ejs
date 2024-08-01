@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Reservation</title>
+</head>
+<body>
+    <%- include('partials/navbar') %> 
+
+    <div class="container">
+        <h1>Book Reservation</h1>
+        
+        <% if (book) { %>
+            <h2>Reserving: <%= book.title %> by <%= book.author %></h2>
+        <% } %>
+        
+        <form action="/reserve" method="POST">
+            <div>
+                <label for="userId">User ID:</label>
+                <input type="text" id="userId" name="userId" required>
+            </div>
+            <% if (book) { %>
+                <input type="hidden" name="bookId" value="<%= book.id %>">
+            <% } else { %>
+                <div>
+                    <label for="bookId">Book ID:</label>
+                    <input type="text" id="bookId" name="bookId" required>
+                </div>
+            <% } %>
+            <button type="submit">Reserve Book</button>
+            </form>
+    </div>
+</body>
+</html>
